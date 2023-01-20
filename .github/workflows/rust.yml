@@ -11,12 +11,9 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container: gcr.io/crosvm-infra/crosvm_dev_user
+    runs-on: debian-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Install dependencies
-      run: bash ./tools/install-deps
-    - name: Build
-      run: cargo build --verbose
+    - name: Install dependencies and build
+      run: python3 ./tools/dev_container ./tools/install-deps && cargo build
