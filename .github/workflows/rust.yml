@@ -1,0 +1,22 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "vilios" ]
+  pull_request:
+    branches: [ "vilios" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: gcr.io/crosvm-infra-experimental/crosvm_cros_cloudbuild:latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: bash ./tools/install-deps
+    - name: Build
+      run: cargo build --verbose
